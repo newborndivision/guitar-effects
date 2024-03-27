@@ -1,0 +1,102 @@
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://unpkg.com/petite-vue" defer init></script>
+<script>
+  const pedals = {
+    "Polytune 3": { role: "Accordeur" },
+    DC7: { role: "Alimentation", shrink: 0.5 },
+    Sol: { role: "Alimentation", shrink: 0.5 },
+    "Baby Bomb": { role: "Amp", shrink: 1.1 },
+    "Baby Bomb 2": { role: "Amp" },
+    "IR-2": { role: "Amp & Cab" },
+    "AW-3": { role: "Auto Wah" },
+    "Dyna Comp Custom": { role: "Compresseur" },
+    Thunderstorm: { role: "Flanger" },
+    "NS-2": { role: "Noise Gate" },
+    "DOD 250": { role: "Overdrive" },
+    "Pitch Fork": { role: "Pitch Shifter" },
+    "WL-50": { role: "Récepteur" },
+    Choka: { role: "Tremolo" },
+    "Plethora X3": { shrink: 0.5 },
+    "Plethora X5": { shrink: 0.5 },
+    Amp1: {},
+    "HX Effects": {},
+  };
+
+  const boards = [
+    [
+      ["WL-50", "Polytune 3", "Choka", "Dyna Comp Custom", "NS-2"],
+      ["AW-3", "Pitch Fork", "Thunderstorm", "DOD 250", "IR-2"],
+    ],
+
+    // With effects switcher (for IR-2, Choka, Thunderstorm)
+    [
+      ["WL-50", "Polytune 3", "NS-2", "Dyna Comp Custom", "Choka"],
+      ["AW-3", "Pitch Fork", "IR-2", "DOD 250", "Thunderstorm"],
+    ],
+
+    [
+      ["WL-50", "Dyna Comp Custom", "Baby Bomb 2", "DC7"],
+      ["AW-3", "Pitch Fork", "Plethora X3", "DOD 250", "IR-2"],
+    ],
+    [
+      [
+        "WL-50",
+        "Dyna Comp Custom",
+        "AW-3",
+        "Pitch Fork",
+        "Plethora X3",
+        "DOD 250",
+        "IR-2",
+        "Baby Bomb",
+      ],
+    ],
+    [
+      ["WL-50", "w-72", "w-72", "Sol"],
+      ["AW-3", "Pitch Fork", "Plethora X3", "IR-2"],
+    ],
+    [["WL-50", "AW-3", "Pitch Fork", "Plethora X3", "IR-2"]],
+
+    // [
+    //   ["WL-50", "NS-2", "Baby Bomb 2", "DC7"],
+    //   ["AW-3", "Plethora X5", "DOD 250", "IR-2"],
+    // ],
+    // [
+    //   ["WL-50", "w-52", "Baby Bomb 2", "w-52", "Sol"],
+    //   ["AW-3", "Plethora X5", "DOD 250", "IR-2"],
+    // ],
+    // [["WL-50", "AW-3", "Pitch Fork", "Plethora X5", "IR-2"]],
+    // [["AW-3", "Pitch Fork", "Plethora X5", "DOD 250", "IR-2"]],
+
+    [
+      ["WL-50", "w-52", "Baby Bomb 2", "w-52", "DC7"],
+      ["AW-3", "HX Effects", "DOD 250", "IR-2"],
+    ],
+    [
+      ["WL-50", "w-52", "Baby Bomb 2", "w-52", "DC7"],
+      ["AW-3", "DOD 250", "HX Effects", "IR-2"],
+    ],
+    // [["WL-50", "AW-3", "HX Effects", "DOD 250", "IR-2"]],
+    [
+      ["WL-50", "w-52", "w-52", "Sol"],
+      ["AW-3", "HX Effects", "IR-2"],
+    ],
+    [["WL-50", "AW-3", "HX Effects", "Amp1"]],
+    [["WL-50", "HX Effects", "Amp1"]],
+  ];
+</script>
+
+<body class="flex flex-col min-h-full justify-center p-12 gap-12 bg-black">
+  <div v-for="board in boards" class="flex flex-col p-3 gap-3 bg-white">
+    <div v-for="line in board" class="flex flex-row-reverse items-end gap-3">
+      <!-- :style="{ flexShrink: pedals[pedal].shrink }" -->
+      <div v-for="pedal in line">
+        <div v-if="pedal.startsWith('w-')" :class="pedal"></div>
+        <img
+          v-else
+          :src="`./pedals/${pedals[pedal].role ? `${pedals[pedal].role} - ` : ``}${pedal}.jpg`"
+          :alt="pedal"
+        />
+      </div>
+    </div>
+  </div>
+</body>
