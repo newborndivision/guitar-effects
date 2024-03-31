@@ -2,24 +2,24 @@
 <script src="https://unpkg.com/petite-vue" defer init></script>
 <script>
   const pedals = {
-    "Polytune 3": "Accordeur",
-    DC7: "Alimentation",
-    Sol: "Alimentation",
-    "Baby Bomb": "Amp",
-    "Baby Bomb 2": "Amp",
-    "IR-2": "Amp & Cab",
-    "AW-3": "Auto Wah",
-    "Dyna Comp Custom": "Compresseur",
-    Thunderstorm: "Flanger",
-    "NS-2": "Noise Gate",
-    "DOD 250": "Overdrive",
-    "Pitch Fork": "Pitch Shifter",
-    "WL-50": "Récepteur",
-    Choka: "Tremolo",
-    "Plethora X3": "",
-    Amp1: "",
-    AmpX: "",
-    "HX Effects": "",
+    "Polytune 3": { role: "Accordeur", width: 720, height: 1191 },
+    DC7: { role: "Alimentation", width: 1600, height: 872 },
+    Sol: { role: "Alimentation", width: 1300, height: 874 },
+    "Baby Bomb": { role: "Amp", width: 420, height: 934 },
+    "Baby Bomb 2": { role: "Amp", width: 934, height: 420 },
+    "IR-2": { role: "Amp & Cab", width: 730, height: 1294 },
+    "AW-3": { role: "Auto Wah", width: 730, height: 1290 },
+    "Dyna Comp Custom": { role: "Compresseur", width: 640, height: 1088 },
+    Thunderstorm: { role: "Flanger", width: 720, height: 1275 },
+    "NS-2": { role: "Noise Gate", width: 730, height: 1289 },
+    "DOD 250": { role: "Overdrive", width: 670, height: 1071 },
+    "Pitch Fork": { role: "Pitch Shifter", width: 750, height: 1158 },
+    "WL-50": { role: "Récepteur", width: 730, height: 1224 },
+    Choka: { role: "Tremolo", width: 740, height: 1315 },
+    "Plethora X3": { width: 1770, height: 1155 },
+    Amp1: { width: 2450, height: 1867 },
+    AmpX: { width: 4260, height: 2101 },
+    "HX Effects": { width: 2740, height: 1936 },
   };
 
   const boards = [
@@ -27,21 +27,8 @@
       ["WL-50", "Polytune 3", "Choka", "Dyna Comp Custom", "NS-2"],
       ["AW-3", "Pitch Fork", "Thunderstorm", "DOD 250", "IR-2"],
     ],
-    // With effects switcher (for IR-2, Choka, Thunderstorm)
     [
-      ["WL-50", "Polytune 3", "NS-2", "Dyna Comp Custom", "Choka"],
-      ["AW-3", "Pitch Fork", "IR-2", "DOD 250", "Thunderstorm"],
-    ],
-    [
-      [
-        "WL-50",
-        "w-0",
-        "Dyna Comp Custom",
-        "w-300",
-        "Baby Bomb 2",
-        "w-300",
-        "DC7",
-      ],
+      ["WL-50", "Dyna Comp Custom", "w-300", "Baby Bomb 2", "w-300", "DC7"],
       ["AW-3", "Pitch Fork", "Plethora X3", "DOD 250", "IR-2"],
     ],
     [
@@ -67,10 +54,17 @@
   <div v-for="board in boards" class="flex flex-col p-3 gap-3 bg-white">
     <div v-for="line in board" class="flex flex-row-reverse items-end gap-3">
       <div v-for="pedal in line">
-        <img v-if="pedal.startsWith('w-')" :width="pedal.split('-')[1]" />
+        <img
+          v-if="pedal.startsWith('w-')"
+          :width="pedal.split('-')[1]"
+          height="0"
+          alt=""
+        />
         <img
           v-else
-          :src="`./pedals/${pedals[pedal] ? `${pedals[pedal]} - ` : ``}${pedal}.jpg`"
+          :src="`./pedals/${pedals[pedal].role ? `${pedals[pedal].role} - ` : ''}${pedal}.jpg`"
+          :width="pedals[pedal].width"
+          :height="pedals[pedal].height"
           :alt="pedal"
         />
       </div>
