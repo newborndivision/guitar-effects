@@ -5,48 +5,63 @@
     "Polytune 3": { role: "Accordeur", width: 720, height: 1191 },
     DC7: { role: "Alimentation", width: 1600, height: 872 },
     Sol: { role: "Alimentation", width: 1300, height: 874 },
-    "Baby Bomb": { role: "Amp", width: 420, height: 934 },
-    "Baby Bomb 2": { role: "Amp", width: 934, height: 420 },
+    "Baby Bomb": { role: "Amp", width: 934, height: 420 },
     "IR-2": { role: "Amp & Cab", width: 730, height: 1294 },
     "AW-3": { role: "Auto Wah", width: 730, height: 1290 },
     "Dyna Comp Custom": { role: "Compresseur", width: 640, height: 1088 },
-    Thunderstorm: { role: "Flanger", width: 720, height: 1275 },
+    Thunderstorm: { role: "Flanger", width: 740, height: 1310 },
     "NS-2": { role: "Noise Gate", width: 730, height: 1289 },
     "DOD 250": { role: "Overdrive", width: 670, height: 1071 },
     "Pitch Fork": { role: "Pitch Shifter", width: 750, height: 1158 },
     "WL-50": { role: "Récepteur", width: 730, height: 1224 },
     Choka: { role: "Tremolo", width: 740, height: 1315 },
-    "Plethora X3": { width: 1770, height: 1155 },
+    FS05: { width: 700, height: 1209 },
+    "HX Effects": { width: 2740, height: 1936 },
+    "HX One": { width: 960, height: 1254 },
     Amp1: { width: 2450, height: 1867 },
     AmpX: { width: 4260, height: 2101 },
-    "HX Effects": { width: 2740, height: 1936 },
   };
 
   const boards = [
+    // Pedals
     [
+      ["Baby Bomb", "w-1400", "DC7"],
       ["WL-50", "Polytune 3", "Choka", "Dyna Comp Custom", "NS-2"],
       ["AW-3", "Pitch Fork", "Thunderstorm", "DOD 250", "IR-2"],
     ],
+
+    // Pedals HX Effects
     [
-      ["WL-50", "Dyna Comp Custom", "w-300", "Baby Bomb 2", "w-300", "DC7"],
-      ["AW-3", "Pitch Fork", "Plethora X3", "DOD 250", "IR-2"],
+      ["WL-50", "w-400", "Baby Bomb", "w-400", "DC7"],
+      ["AW-3", "HX Effects", "IR-2"],
     ],
+
+    // Pedals Amp1
     [
       ["WL-50", "Polytune 3", "Dyna Comp Custom", "w-1600", "DC7"],
       ["AW-3", "Pitch Fork", "Thunderstorm", "Choka", "Amp1"],
     ],
+
+    // FS05 Amp1
     [
-      ["WL-50", "w-800", "Baby Bomb 2", "w-800", "DC7"],
-      ["AW-3", "HX Effects", "DOD 250", "IR-2"],
+      ["WL-50", "Polytune 3", "Dyna Comp Custom", "w-300", "Sol"],
+      ["Pitch Fork", "FS05", "Amp1"],
     ],
+
+    // HX Effects Amp1
     [
-      ["WL-50", "w-2200", "Sol"],
-      ["AW-3", "HX Effects", "IR-2"],
+      ["WL-50", "w-4000", "Sol"],
+      ["AW-3", "HX Effects", "Amp1"],
     ],
-    [["WL-50", "AW-3", "HX Effects", "Amp1"]],
+
+    // HX One Amp1
+    [
+      ["WL-50", "w-2300", "Sol"],
+      ["AW-3", "HX One", "Amp1"],
+    ],
+
+    // AmpX
     [["WL-50", "AW-3", "Pitch Fork", "AmpX"]],
-    [["WL-50", "AW-3", "AmpX"]],
-    [["WL-50", "AmpX"]],
   ];
 </script>
 
