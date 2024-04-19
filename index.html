@@ -9,19 +9,28 @@
     Sol: { role: "Alimentation", width: 1300, height: 874 },
     "Baby Bomb": { role: "Amp", width: 934, height: 420 },
     "IR-2": { role: "Amp & Cab", width: 730, height: 1294 },
+    Amp1: { width: 2450, height: 1867 },
+    AmpX: { width: 4260, height: 2101 },
     "AW-3": { role: "Auto Wah", width: 730, height: 1290 },
     "Dyna Comp Custom": { role: "Compresseur", width: 640, height: 1088 },
+    "DMC-3XL Gen3": { role: "Controlleur", width: 1200, height: 718 },
+    "DMC-8 Gen3": { role: "Controlleur", width: 2500, height: 708 },
+    "DMC.micro PRO": { role: "Controlleur", width: 930, height: 440 },
+    "Gecko MKIII": { role: "Controlleur", width: 1200, height: 640 },
+    "MIDI Baby 3": { role: "Controlleur", width: 1120, height: 666 },
+    DVP3: { role: "Expression", width: 760, height: 1670 },
+    DVP5: { role: "Expression", width: 924, height: 1030 },
     Thunderstorm: { role: "Flanger", width: 740, height: 1310 },
+    FS05: { role: "Multi", width: 700, height: 1209 },
+    "H9 Max": { role: "Multi", width: 1180, height: 1321 },
+    H90: { role: "Multi", width: 1700, height: 1380 },
+    "HX Effects": { role: "Multi", width: 2740, height: 1936 },
+    "HX One": { role: "Multi", width: 960, height: 1254 },
     "NS-2": { role: "Noise Gate", width: 730, height: 1289 },
     "DOD 250": { role: "Overdrive", width: 670, height: 1071 },
     "Pitch Fork": { role: "Pitch Shifter", width: 750, height: 1158 },
     "WL-50": { role: "Récepteur", width: 730, height: 1224 },
     Choka: { role: "Tremolo", width: 740, height: 1315 },
-    FS05: { width: 700, height: 1209 },
-    "HX Effects": { width: 2740, height: 1936 },
-    "HX One": { width: 960, height: 1254 },
-    Amp1: { width: 2450, height: 1867 },
-    AmpX: { width: 4260, height: 2101 },
   };
 
   const boards = [
@@ -34,56 +43,95 @@
 
     // Pedals HX Effects
     [
-      ["WL-50", "w-400", "Baby Bomb", "w-400", "DC7"],
-      ["AW-3", "HX Effects", "IR-2"],
+      ["Baby Bomb", "w-400", "DC7"],
+      [["WL-50", "AW-3"], "HX Effects", "IR-2"],
     ],
 
     // Pedals Amp1
     [
-      ["WL-50", "Polytune 3", "Dyna Comp Custom", "w-1600", "DC7"],
-      ["AW-3", "Pitch Fork", "Thunderstorm", "Choka", "Amp1"],
+      ["w-2800", "DC7"],
+      [
+        ["Choka", "Polytune 3"],
+        ["Thunderstorm", "AW-3"],
+        ["Dyna Comp Custom", "Pitch Fork"],
+        "Amp1",
+      ],
+    ],
+
+    // Pedals Amp1
+    [
+      ["w-3400", "Sol"],
+      [
+        ["WL-50", "Polytune 3"],
+        ["Choka", "Pitch Fork"],
+        ["Thunderstorm", "Dyna Comp Custom"],
+        "Amp1",
+      ],
     ],
 
     // FS05 Amp1
     [
-      ["WL-50", "Polytune 3", "Dyna Comp Custom", "w-300", "Sol"],
+      ["Polytune 3", "Dyna Comp Custom", "w-1000", "Sol"],
       ["Pitch Fork", "FS05", "Amp1"],
     ],
 
-    // HX Effects Amp1
+    // H9 Max Amp1
     [
-      ["WL-50", "w-4000", "Sol"],
-      ["AW-3", "HX Effects", "Amp1"],
+      [
+        ["Dyna Comp Custom", "Polytune 3"],
+        "DVP5",
+        ["H9 Max", "Gecko MKIII"],
+        "Amp1",
+      ],
     ],
 
-    // HX One Amp1
+    // H9 Max HX One Amp1
+    [["DVP5", ["HX One", "DMC.micro PRO"], ["H9 Max"], "Amp1"]],
+
+    // H9 Max HX One Amp1
     [
-      ["WL-50", "w-2300", "Sol"],
-      ["AW-3", "HX One", "Amp1"],
+      [
+        ["WL-50", "DVP5"],
+        ["H9 Max", "HX One"],
+        ["Amp1", "DMC-8 Gen3"],
+      ],
     ],
+
+    // H90 Amp1
+    [
+      ["WL-50", "Polytune 3", "w-2000", "Sol"],
+      ["DVP5", "H90", "Amp1"],
+    ],
+
+    // HX Effects Amp1
+    [["DVP5", "HX Effects", "Amp1"]],
 
     // AmpX
-    [["WL-50", "AW-3", "Pitch Fork", "AmpX"]],
+    [["DVP3", "AmpX", ["WL-50", "Pitch Fork"]]],
   ];
 </script>
 
-<body class="flex flex-col min-h-full justify-center p-12 gap-12 bg-black">
+<body class="flex flex-col min-h-full justify-center p-6 gap-6 bg-black">
   <div v-for="board in boards" class="flex flex-col p-3 gap-3 bg-white">
     <div v-for="line in board" class="flex flex-row-reverse items-end gap-3">
-      <div v-for="pedal in line">
-        <img
-          v-if="pedal.startsWith('w-')"
-          :width="pedal.split('-')[1]"
-          height="0"
-          alt=""
-        />
-        <img
-          v-else
-          :src="`./pedals/${pedals[pedal].role ? `${pedals[pedal].role} - ` : ''}${pedal}.jpg`"
-          :width="pedals[pedal].width"
-          :height="pedals[pedal].height"
-          :alt="pedal"
-        />
+      <div v-for="pedalsCol in line" class="flex flex-col items-center gap-3">
+        <div
+          v-for="pedal in Array.isArray(pedalsCol) ? pedalsCol : [pedalsCol]"
+        >
+          <img
+            v-if="pedal.startsWith('w-')"
+            :width="pedal.split('-')[1]"
+            height="0"
+            alt=""
+          />
+          <img
+            v-else
+            :src="`./pedals/${pedals[pedal].role ? `${pedals[pedal].role} - ` : ''}${pedal}.jpg`"
+            :width="pedals[pedal].width"
+            :height="pedals[pedal].height"
+            :alt="pedal"
+          />
+        </div>
       </div>
     </div>
   </div>
